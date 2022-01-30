@@ -1,3 +1,4 @@
+from dis import dis
 from helpers import plot_poles, plot_measurement_circles, plot_robot
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,6 +9,8 @@ def distance_difference_squared(guess_location, pole, pole_measurement):
     ### STUDENT CODE START
     output = 0
     # calc distance between guess location and pole.
+    distance = np.sqrt((guess_location[0]-pole[0])**2 + (guess_location[1]-pole[1])**2)
+    output = distance - pole_measurement
     # compare distance vs pole_measurement
     ### STUDENT CODE END
     return output**2

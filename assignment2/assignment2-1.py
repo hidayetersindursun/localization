@@ -30,7 +30,7 @@ def shift_priors(P_loc_i):
     # Shift all probabilities to the right by one.
     for i in range(len(P_loc_i)-1,0,-1):
         P_loc_i[i] = P_loc_i[i-1]
-    print(P_loc_i)
+  
     P_loc_i[0] = 0
     # STUDENT CODE END
 

@@ -1,3 +1,5 @@
+from turtle import pos
+from soupsieve import select
 from sim.plot import plot_simple
 import random as r
 
@@ -29,13 +31,14 @@ class Particle(Robot):
     def predict(self):
         # START STUDENT CODE
         # Move the particle the same distance as the robot moves.
-
-        # END STUDENT CODE
+        self.pos += self.move_dist   # END STUDENT CODE
 
     def update_belief(self, robot_pole_detected):
         # START STUDENT CODE
         # Set the belief to 0 if the robot detection and the particle detection
         # don't match.
+        if robot_pole_detected != self.pole_detected:
+            self.belief = 0
 
         # END STUDENT CODE
 
@@ -71,5 +74,5 @@ for j in range(12):
 
         # Update Beliefs
         particle.update_belief(robot.pole_detected)
-
+       
     plot_simple(particles, poles, robot.pos, j)

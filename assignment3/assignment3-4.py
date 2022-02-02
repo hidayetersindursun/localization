@@ -14,16 +14,23 @@ class Particle(Robot):
     def __init__(self, pos):
         Robot.__init__(self, pos)
         self.weight = 0
-        self.measurement_sigma = 0.5
+        self.measurement_sigma = 1
 
     def probability_density_function(self, mu, x):
         ### STUDENT CODE START
+        pdf = (np.exp((((x - mu)/self.measurement_sigma)**2)*(-0.5)))/(self.measurement_sigma*np.sqrt(2*np.pi))  
+        #return 1.0 gibi bi şey
+        return pdf
         ### STUDENT CODE END
 
     def update_weight(self, robot_dist):
         ### STUDENT CODE START
+        
+        self.weight = particle.probability_density_function(robot_dist, self.pole_dist)
+        # self.weight i güncelle 
+        
         ### STUDENT CODE START
-
+        
 
 # Plot Weights for a range of robot measurements.
 particle = Particle(0.0)
@@ -47,7 +54,7 @@ print(round(sum_probability * 0.01, 2))
 print()
 
 # Update Particle Weigth based on robot measurement.
-robot_dist = 3.0
+robot_dist = 4.0
 particle.pole_dist = 3.0
 particle.update_weight(robot_dist)
 print("Particle Weight: " + str(round(particle.weight, 2)))

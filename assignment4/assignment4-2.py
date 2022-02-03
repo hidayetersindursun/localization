@@ -18,7 +18,7 @@ for measurement in robot.measurements:
 print()
 print("Measurement Answers:")
 print("Distance: 56.6 Angle: 0.79")
-print("Distance: 30.0 Angle: 0.0")
-print("Distance: 20.0 Angle: 1.57")
-print("Distance: 25.0 Angle: 3.14")
+print("Distance: 30.0 Angle: 0.0") 
+print("Distance: 20.0 Angle: 1.57") #pi/2
+print("Distance: 25.0 Angle: 3.14") # pi
 plot(robot, poles=poles)

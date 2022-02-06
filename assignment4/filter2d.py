@@ -1,6 +1,7 @@
 from turtle import distance
 from matplotlib.pyplot import sca
 from numpy import mat
+import scipy as sp
 from torch import angle
 from sim.plot2d import plot
 import random as r
@@ -41,9 +42,9 @@ class Robot(Position):
         ### END STUDENT CODE
 
     def move_with_error(self, speed, theta_dot):
-        ### START STUDENT CODE
+        theta_dot = r.normalvariate(theta_dot, 0.2)
+        speed = r.normalvariate(speed, 0.5)
         self.move(speed, theta_dot)
-        ### END STUDENT CODE
 
     # Measurement is perfectly accurate even though we are assuming it isn't.
     def measure(self, poles):

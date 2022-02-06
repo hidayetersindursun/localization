@@ -4,7 +4,7 @@ import random as r
 import math
 
 
-# r.seed(939)
+# r.seed(939)   # eğer yorumsa pole ların yeri random seçilcek.
 robot = Robot([10, 10, 0])
 poles = []
 num_poles = 5

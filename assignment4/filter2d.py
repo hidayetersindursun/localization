@@ -1,4 +1,5 @@
 from turtle import distance
+from matplotlib.pyplot import sca
 from numpy import mat
 from torch import angle
 from sim.plot2d import plot
@@ -100,7 +101,7 @@ class Particle(Robot):
             best_match = 0
             for r in robot_measurements: # robot's measurements
                 distance_match = self.probability_density_function(r.distance, self.distance_sigma, p.distance)
-                # normalize match to 1 so we can treat distance and angle as equal weight
+                # normalize match   to 1 so we can treat distance and angle as equal weight
                 distance_match = distance_match/self.distance_distribution_peak
                 distance_match *= self.distance_weight
                 
@@ -130,6 +131,23 @@ class Particle(Robot):
 
 def resample_particles(particles):
     ### START STUDENT CODE
+    num_particles = 100
+    weights = []
     resampled_particles = []
+    for particle in particles:
+        weights += [particle.weight]
+    resample = r.choices(range(num_particles),weights,k=num_particles)
+    
+    scale = len(particles) / (sum(weights)*5)
+    if scale > 10:
+        scale = 10
+    if scale < 0.5:  # this is added for assignment 4-5, don't use in 4-4 !
+        scale =0     # this is added for assignment 4-5, don't use in 4-4 !
+    for i in resample:
+        x = particles[i].x + r.normalvariate(0, particles[0].speed_sigma * scale)
+        y = particles[i].y + r.normalvariate(0, particles[0].speed_sigma * scale)
+        theta = particles[i].theta + r.normalvariate(0, particles[0].theta_dot_sigma * scale)
+        resampled_particles += [Particle([x,y,theta])]
+    
     return resampled_particles
     ### END STUDENT CODE
